@@ -39,7 +39,7 @@ contract Campaign {
         _;
     }
 
-    function Campaign(string category, string titl,
+    constructor(string category, string titl,
                       uint minimum, address creator, string detail) public {
         manager = creator;
         minimumContribution = minimum;
@@ -93,7 +93,7 @@ contract Campaign {
             title,
             details,
             minimumContribution,
-            this.balance,
+            address(this).balance,
             approversCount,
             requests.length,
             manager
