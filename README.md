@@ -9,7 +9,9 @@ A decentralized application that facilitates sponsorships and donations (in ethe
 * Clone this repo onto your local PC 
 * Change into the cloned-repo directory 
 * type "npm install"
-
+* go to ethereum directory
+* run "node compile.js"
+* run "node deploy.js"
 * Run the dApp `sudo npm start`
 * Open `http://localhost:3000/` in your browser 
 
