@@ -35,12 +35,13 @@ describe('Campaigns', () => {
     assert.ok(factory.options.address);
     assert.ok(campaign.options.address);
   });
-
+//marks the caller of createCampaign(), as the campaign manager
   it('marks the caller of createCampaign(), as the campaign manager', async () => {
     const manager = await campaign.methods.manager().call();
     assert.equal(accounts[0], manager);
   });
 
+  //allows people to contribute money and marks them as approvers
   it('allows people to contribute money and marks them as approvers', async () => {
     await campaign.methods.contribute().send({
       value: '200',
@@ -50,6 +51,8 @@ describe('Campaigns', () => {
     assert(isContributor);
   });
 
+  
+  //requires a minimum contribution
   it('requires a minimum contribution', async () => {
     try{
       await campaign.methods.contribute().send({
@@ -62,6 +65,8 @@ describe('Campaigns', () => {
     }
   });
 
+  
+  //allows a manager to make a payment request
   it('allows a manager to make a payment request', async () => {
     await campaign.methods
       .createRequest('Buy batteries', '100', accounts[1])
