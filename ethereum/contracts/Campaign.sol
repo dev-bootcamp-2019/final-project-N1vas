@@ -14,6 +14,7 @@ contract CampaignFactory {
     }
 }
 
+//created required variables
 
 contract Campaign {
     struct Request {
@@ -48,12 +49,16 @@ contract Campaign {
         details = detail;
     }
 
+//this funstion checks the the contributer has to contribute a min value. 
     function contribute() public payable {
         require(msg.value > minimumContribution);
 
         approvers[msg.sender] = true;
         approversCount++;
     }
+
+
+//a function created to create a request to use the funds
 
     function createRequest(string description, uint value, address recipient) public restricted {
         Request memory newRequest = Request({
@@ -66,6 +71,8 @@ contract Campaign {
 
         requests.push(newRequest);
     }
+
+//a function created to approve the request of the person who put the request for using funds
 
     function approveRequest(uint index) public {
         Request storage request = requests[index];
@@ -87,6 +94,9 @@ contract Campaign {
         request.complete = true;
     }
 
+
+//just returning all the details for getting the values
+
     function getSummary() public view returns(string, string, string, uint, uint, uint, uint, address) {
         return (
             chooseCategory,
@@ -99,6 +109,8 @@ contract Campaign {
             manager
         );
     }
+
+//returns the total num of requests
 
     function getRequestsCount() public view returns(uint) {
         return requests.length;
